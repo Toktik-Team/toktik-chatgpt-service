@@ -9,8 +9,9 @@ export class GPTService {
       apiKey: process.env.CHATGPT_API_KEY,
       debug: process.env.NODE_ENV === 'development',
     });
+    // TODO: support password
     const client = createClient({
-      url: process.env.REDIS_URL,
+      url: `redis://${process.env.REDIS_ADDR}/${process.env.REDIS_DB}`,
     });
     const subscriber = client.duplicate();
     subscriber.on('error', (err) => console.error(err));
