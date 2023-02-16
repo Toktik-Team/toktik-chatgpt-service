@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { ChatGPTSession } from './gpt/gpt.entity';
+import { migration1676561421398 } from '../migrations/1676561421398-migration';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [ChatGPTSession],
-  migrations: [],
+  migrations: [migration1676561421398],
   subscribers: [],
 });
 
