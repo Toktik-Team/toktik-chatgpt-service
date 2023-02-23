@@ -62,7 +62,11 @@ export class GPTService {
         }
 
         const responseChannel = `chat:0:${senderId}`;
-        const redisResult = await client.lPush(responseChannel, resp.text);
+        const score = new Date().getTime();
+        const redisResult = await client.zAdd(responseChannel, {
+          score: score,
+          value: resp.text,
+        });
         Logger.log(`Redis Response: ${redisResult}`);
       } catch (err) {
         Logger.error(err);
